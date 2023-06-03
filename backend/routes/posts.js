@@ -41,6 +41,8 @@ router.post(
       title: req.body.title,
       content: req.body.content,
       imagePath: url + "/images/" + req.file.filename,
+      // Kacper
+      // creator: req.body.userId
       creator: req.userData.userId
     });
     post.save().then(createdPost => {
@@ -69,7 +71,10 @@ router.put(
       _id: req.body.id,
       title: req.body.title,
       content: req.body.content,
-      imagePath: imagePath
+      imagePath: imagePath,
+      // Kacper
+      // creator: req.body.userId
+      creator: req.userData.userId
     });
     // console.log(post);
     Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {

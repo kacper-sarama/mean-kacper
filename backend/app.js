@@ -10,7 +10,7 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://kacper:kacper@clusterkacper.ounso3w.mongodb.net/node-angular?&w=majority"
+    "mongodb+srv://kacper:" + process.env.MONGO_ATLAS_PASSWORD + "@clusterkacper.ounso3w.mongodb.net/node-angular?&w=majority"
     // "mongodb+srv://kacper:kacper@clusterkacper.ounso3w.mongodb.net/node-angular?retryWrites=true&w=majority"
   )
   .then(() => {

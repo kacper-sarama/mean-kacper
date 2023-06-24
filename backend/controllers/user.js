@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const User = require("../models/user");
 
- exports.createUser = (req, res, next) => {
+exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then((hash) => {
     const user = new User({
       email: req.body.email,
@@ -16,13 +16,13 @@ const User = require("../models/user");
           result: result,
         });
       })
-      .catch((err) => {
+      .catch(() => {
         res.status(500).json({
-          error: err,
+          message: "Invalid authentication credentials",
         });
       });
   });
-}
+};
 
 exports.userLogin = (req, res, next) => {
   let fetchedUser;
@@ -53,13 +53,13 @@ exports.userLogin = (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id
+        userId: fetchedUser._id,
       });
     })
     .catch((err) => {
       console.log(err);
       return res.status(401).json({
-        message: "Auth failed",
+        message: "Invalid authentication credentials",
       });
     });
-}
+};
